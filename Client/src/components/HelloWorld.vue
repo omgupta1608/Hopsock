@@ -1,58 +1,139 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="log-form">
+    <h2>Login to your account</h2>
+    <form>
+      <input type="text" title="username" placeholder="username" />
+      <input type="password" title="username" placeholder="password" />
+      <button type="submit" class="btn">Login</button>
+      <a class="forgot" href="#">Forgot Username?</a>
+    </form>
   </div>
+  <!--end log form -->
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style lang="less">
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,300,600);
+
+* {
+  box-sizing: border-box;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+@grey: transparent;
+@blue: #1fb5bf;
+.log-form {
+  width: 40%;
+  min-width: 320px;
+  max-width: 475px;
+  
+  background-color:transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 40em) {
+    width: 95%;
+    position: relative;
+    margin: 2.5% auto 0 auto;
+    left: 0%;
+    -webkit-transform: translate(0%, 0%);
+    -moz-transform: translate(0%, 0%);
+    -o-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+  }
+
+  form {
+    display: block;
+    width: 100%;
+    padding: 2em;
+  }
+
+  h2 {
+    width: 100%;
+    color: #fff;
+    font-family: "open sans condensed";
+    font-size: 1.35em;
+    display: block;
+    background: @grey;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 0.75em 1em 0.75em 1.5em;
+    box-shadow: inset 0px 1px 1px fadeout(white, 95%);
+    border: 1px solid darken(@grey, 5%);
+    //text-shadow: 0px 1px 1px darken(@grey, 5%);
+    margin: 0;
+    font-weight: 200;
+  }
+
+  input {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    margin-bottom: 2em;
+    padding: 0.5em 0;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    background-color: transparent;
+    padding-bottom: 1.25em;
+    color: #ffffff;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    background: @blue;
+    border: 1px solid darken(@blue, 5%);
+    padding: 0.5em 2em;
+    color: white;
+    margin-right: 0.5em;
+    box-shadow: inset 0px 1px 0px fadeout(white, 80%);
+    &:hover {
+      background: lighten(@blue, 5%);
+    }
+    &:active {
+      background: @blue;
+      box-shadow: inset 0px 1px 1px fadeout(black, 90%);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .forgot {
+    color: lighten(@blue, 10%);
+    line-height: 0.5em;
+    position: relative;
+    top: 2.5em;
+    text-decoration: none;
+    font-size: 0.75em;
+    margin: 0;
+    padding: 0;
+    float: right;
+
+    &:hover {
+      color: darken(@blue, 5%);
+    }
+    &:active {
+    }
+  }
 }
 </style>
