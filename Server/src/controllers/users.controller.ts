@@ -6,12 +6,12 @@ export class UsersController {
     constructor(private readonly usersService:UsersService){}
 
     @Get('/')
-    getAllUsers() {
-        return this.usersService.getAllUsers();
+    async getAllUsers() {
+        return await this.usersService.getAllUsers();
     }
 
     @Get(':userid')
-    getOneUser(@Param('userid') userid) {
-        return this.usersService.getOneUser(userid);
+    async getOneUser(@Param('userid') userid) {
+        return await this.usersService.getOneUser(userid);
     }
 }
