@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Body, Post, HttpException, HttpStatus, Delete, Put } from '@nestjs/common';
 import { WorkSpaceDto } from 'src/dto/workspace.dto';
+import { UserDto } from 'src/dto/users.dto';
 import { WorkspacesService } from '../services/workspaces.services';
 
 @Controller('api/workspace')
@@ -20,7 +21,7 @@ export class WorkSpacesController {
         }
     }
 
-    @Get(':wid')
+    @Get('single/:wid')
     async getOneWorkSpace(@Param('wid') wid) {
         if (wid.match(/^[0-9a-fA-F]{24}$/)) {
             return this.workspaceService.getOneWorkSpace(wid);
@@ -43,6 +44,7 @@ export class WorkSpacesController {
         }
     }
 
+    //HAS SOME BUGSS
     @Put(':wid')
     async updateWorkSpace(@Param('wid') wid, @Body() wk: WorkSpaceDto) {
         if (wid.match(/^[0-9a-fA-F]{24}$/)) {
@@ -50,5 +52,15 @@ export class WorkSpacesController {
         } else {
             throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Put('addMember/:wid/:userid')
+    async addMemberToWk(@Param('wid') wid, @Param('userid') userid) {
+        return this.workspaceService.addMember(wid, userid);
+    }
+
+    @Put('removeMember/:wid/:userid')
+    async removeMemberFormWk(@Param('wid') wid, @Param('userid') userid) {
+        return this.workspaceService.removeMember(wid, userid);
     }
 }

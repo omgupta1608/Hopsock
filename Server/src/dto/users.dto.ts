@@ -5,6 +5,7 @@ export class UserDto{
     readonly own_workspaces: Array<string>;
     readonly others_workspaces: Array<string>;
     readonly password: string;
+    readonly email: string;
     readonly todo_list_count:number;
     readonly todos:Array<string>;
 }

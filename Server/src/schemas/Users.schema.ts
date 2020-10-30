@@ -13,6 +13,7 @@ export const UsersSchema = new mongoose.Schema({
     own_workspaces: Array,
     others_workspaces: Array,
     password: String,
+    email:String,
     todo_list_count: {
         type: Number,
         default: 0

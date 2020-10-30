@@ -27,7 +27,7 @@ export class WorkspacesService {
         }
 
     }
-    
+
     async MakeNewWorkSpace(workspace: WorkSpaceInterface): Promise<WorkSpaceInterface> {
         const newWS = new this._workspaces(workspace);
         return await newWS.save();
@@ -43,9 +43,30 @@ export class WorkspacesService {
 
     async updateWorkSpace(wid: string, wk: WorkSpaceInterface): Promise<WorkSpaceInterface> {
         if (wid.match(/^[0-9a-fA-F]{24}$/)) {
-            return await this._workspaces.findByIdAndUpdate(wid, wk, { new: true, useFindAndModify:true });
+            return await this._workspaces.findByIdAndUpdate(wid, wk, { new: true, useFindAndModify: true });
         } else {
             throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    async addMember(wid: string, userid: string) {
+        const wk = this._workspaces.findByIdAndUpdate(wid, {
+            $push: { members: userid }
+        });
+        return wk;
+    }
+
+    async removeMember(wid: string, userid: string) {
+        const wk = this._workspaces.findById(wid);
+        var members = wk.members;
+        console.log(members);
+        const index = members.indexOf(userid);
+        if (index > -1) {
+            members.splice(index, 1);
+        }
+        console.log(members);
+        wk.members = members;
+        return this._workspaces.findByIdAndUpdate(wid, { members: members });
     }
 }

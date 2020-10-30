@@ -12,7 +12,7 @@ export class UsersController {
     }
 
     @Get(':userid')
-    async getOneUser(@Param('userid') userid) {
+    async getOneUser(@Param('userid') userid:string) {
         if (userid.match(/^[0-9a-fA-F]{24}$/)) {
             return await this.usersService.getOneUser(userid);
         } else {
@@ -26,7 +26,7 @@ export class UsersController {
     }
 
     @Delete(':userid')
-    async delteUser(@Param('userid') userid) {
+    async delteUser(@Param('userid') userid:string) {
         if (userid.match(/^[0-9a-fA-F]{24}$/)) {
             return await this.usersService.delteUser(userid);
         } else {
@@ -34,8 +34,10 @@ export class UsersController {
         }
 
     }
+
+    //HAS SOME BUGSS
     @Put(':userid')
-    async update(@Param('userid') userid, @Body() user: UserDto) {
+    async update(@Param('userid') userid:string, @Body() user: UserDto) {
         if (userid.match(/^[0-9a-fA-F]{24}$/)) {
             return await this.usersService.updateUser(userid, user);
         } else {
