@@ -29,6 +29,6 @@ export class UsersService {
     }
 
     async updateUser(userid: string, user: UserInterface): Promise<UserInterface> {
-        return await this._users.findByIdAndUpdate(userid, user, { new: true, useFindAndModify:true });
+        return await this._users.findByIdAndUpdate(userid, user, { new: true, useFindAndModify:false });
     }
 }

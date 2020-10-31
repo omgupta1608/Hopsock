@@ -12,20 +12,11 @@ export class WorkspacesService {
     }
 
     async getUsersWorkSpaces(userid: string): Promise<WorkSpaceInterface[]> {
-        if (userid.match(/^[0-9a-fA-F]{24}$/)) {
-            return await this._workspaces.find({ owner: userid });
-        } else {
-            throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
-        }
+        return await this._workspaces.find({ owner: userid });
     }
 
     async getOneWorkSpace(wid: string): Promise<WorkSpaceInterface> {
-        if (wid.match(/^[0-9a-fA-F]{24}$/)) {
-            return await this._workspaces.findById(wid);
-        } else {
-            throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
-        }
-
+        return await this._workspaces.findById(wid);
     }
 
     async MakeNewWorkSpace(workspace: WorkSpaceInterface): Promise<WorkSpaceInterface> {
@@ -34,38 +25,30 @@ export class WorkspacesService {
     }
 
     async deleteWorkSpace(wid: string): Promise<WorkSpaceInterface> {
-        if (wid.match(/^[0-9a-fA-F]{24}$/)) {
-            return await this._workspaces.findByIdAndRemove(wid);
-        } else {
-            throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
-        }
+        return await this._workspaces.findByIdAndRemove(wid);
     }
 
     async updateWorkSpace(wid: string, wk: WorkSpaceInterface): Promise<WorkSpaceInterface> {
-        if (wid.match(/^[0-9a-fA-F]{24}$/)) {
-            return await this._workspaces.findByIdAndUpdate(wid, wk, { new: true, useFindAndModify: true });
-        } else {
-            throw new HttpException('Something went wrong!', HttpStatus.BAD_REQUEST);
-        }
+        return await this._workspaces.findByIdAndUpdate(wid, wk, { new: true, useFindAndModify: false });
     }
-
 
     async addMember(wid: string, userid: string) {
         const wk = this._workspaces.findByIdAndUpdate(wid, {
-            $push: { members: userid }
+            $push: { 
+                members: userid,
+                useFindAndModify:false
+            }
         });
         return wk;
     }
 
-    async removeMember(wid: string, userid: string) {
-        const wk = this._workspaces.findById(wid);
+    async removeMember(wid: string, userid: string) { 
+        const wk = await this._workspaces.findById(wid);
         var members = wk.members;
-        console.log(members);
         const index = members.indexOf(userid);
         if (index > -1) {
             members.splice(index, 1);
         }
-        console.log(members);
         wk.members = members;
         return this._workspaces.findByIdAndUpdate(wid, { members: members });
     }
