@@ -1,20 +1,29 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  beforeMount() {
+    if (localStorage.getItem("isLoggedIn") || this.isLoggedIn) {
+      this.$router.push("home");
+    } else {
+      this.$router.push("login");
+    }
+  },
+  computed:{
+    isLoggedIn(){
+      return this.$store.state.isLoggedIn;
+    }
   }
-}
+};
 </script>
 
 <style>
-
+#app {
+  background-color: rgb(243, 229, 229);
+}
 </style>
