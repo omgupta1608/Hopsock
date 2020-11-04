@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         wktab:'home',
         isLoggedIn: true,
-        openProfile:false
+        openProfile:false,
+        maintab:'home'
     },
     mutations: {
         changeWkTab(state,tab){
@@ -18,6 +19,9 @@ export default new Vuex.Store({
         },
         openProfile(state,open){
             state.openProfile = open;
+        },
+        changeMainTab(state,tab){
+            state.maintab = tab;
         }
     }
 });
