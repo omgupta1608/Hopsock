@@ -7,7 +7,7 @@ export default new Vuex.Store({
     state: {
         wktab:'home',
         isLoggedIn: true,
-        openProfile:true
+        openProfile:false
     },
     mutations: {
         changeWkTab(state,tab){
@@ -15,6 +15,9 @@ export default new Vuex.Store({
         },
         toggleAuth(state,auth){
             state.isLoggedIn = auth;
+        },
+        openProfile(state,open){
+            state.openProfile = open;
         }
     }
 });

@@ -4,6 +4,7 @@
       <NavBar/>
       <Profile v-if="openProfile"/>
       <MainPage v-if="!openProfile" />
+      
       <!-- <Profile v-if="tab == 'profile'" /> -->
     </div>
   </div>
@@ -32,7 +33,4 @@ export default {
 </script>
 
 <style>
-#app{
-   background-color: rgb(243, 229, 229);
-}
 </style>
