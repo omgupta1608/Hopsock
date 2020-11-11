@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
+import WkMainPage from './views/WorkSpace/WkMainPage.vue';
 
 const routes = [
   {
@@ -12,12 +13,16 @@ const routes = [
     component: Login
   },
   {
-    path: '/home',
+    path: '/',
     component: Home
   },
   {
     path:'/register',
     component: Register
+  },
+  {
+    path: '/workspace',
+    component: WkMainPage
   }
 ];
 

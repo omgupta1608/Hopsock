@@ -15,7 +15,7 @@ import NavBar from '../components/NavBar.vue';
 import MainPage from '../views/MainPage.vue';
 import Profile from '../views/Profile.vue';
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
     MainPage,
     NavBar,

@@ -8,7 +8,7 @@
     </div>
     <div v-if="wks.length != 0">
       <div class="workspaces-main" v-for="(wk, index) in wks" :key="index">
-        <div class="card">
+        <div class="card" @click="openWk(wk._id)">
           <div class="media media--80x80 float-right">
             <img
               src="https://picsum.photos/400"
@@ -88,6 +88,13 @@ export default {
       },
     ],
   }),
+  methods:{
+    async openWk(wid){
+      await this.$store.commit("changeOpenedWkId", wid);
+      console.log(this.$store.state);
+      window.open(`workspace`,'_self');
+    }
+  }
 };
 </script>
 <style>
@@ -213,7 +220,7 @@ export default {
   color: rgba(0, 0, 0, 0.87);
   margin: 8px;
   min-width: 18rem;
-  width: 30rem;
+  width: 55rem;
   overflow: hidden;
   position: relative;
 }
